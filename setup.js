@@ -1,6 +1,8 @@
 /**
  * Setup script untuk aplikasi Seblak Bujangan
  * Script ini membantu menyiapkan lingkungan dan instalasi dependencies
+ * 
+ * Untuk menjalankan script ini, gunakan: node setup.js atau npm run setup
  */
 
 const spawn = require('cross-spawn');

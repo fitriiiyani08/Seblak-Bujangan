@@ -1,12 +1,15 @@
 @echo off
+REM Batch file untuk menjalankan aplikasi Seblak Bujangan pada Windows
+TITLE Aplikasi Seblak Bujangan
+
 echo ========================================
-echo  Menjalankan Aplikasi Seblak Bujangan
+echo   Menjalankan Aplikasi Seblak Bujangan
 echo ========================================
 echo.
 
-REM Cek apakah folder venv ada
+REM Cek jika virtual environment ada
 if not exist venv (
-    echo [31mVirtual environment tidak ditemukan.[0m
+    echo [ERROR] Virtual environment tidak ditemukan.
     echo Jalankan install.bat terlebih dahulu.
     echo.
     pause
@@ -14,16 +17,18 @@ if not exist venv (
 )
 
 REM Aktifkan virtual environment
-echo [33m[INFO] Mengaktifkan virtual environment...[0m
+echo [PROSES] Mengaktifkan virtual environment...
 call venv\Scripts\activate.bat
 
-REM Jalankan aplikasi
-echo [33m[INFO] Menjalankan aplikasi Seblak Bujangan...[0m
-echo [33m[INFO] Aplikasi akan terbuka di browser secara otomatis.[0m
-echo [33m[INFO] Tekan Ctrl+C untuk menghentikan aplikasi.[0m
+REM Jalankan aplikasi menggunakan npm start
+echo [PROSES] Menjalankan aplikasi Seblak Bujangan...
+echo Aplikasi akan terbuka di browser secara otomatis pada http://localhost:5000
+echo Tekan Ctrl+C untuk menghentikan aplikasi.
 echo.
 
 node start.js
 
-REM Deaktivasi virtual environment saat selesai
+REM Deaktivasi virtual environment
 call venv\Scripts\deactivate.bat
+
+pause
