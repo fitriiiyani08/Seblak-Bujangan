@@ -41,11 +41,26 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin-bottom: 1rem;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="%23e63946" opacity="0.2"><path d="M2,9.5V4a1,1,0,0,1,1-1H7.5a1,1,0,0,1,0,2h-3v3A1,1,0,0,1,2,9.5ZM20.5,4H16.5a1,1,0,0,0,0,2h3v3a1,1,0,0,0,2,0V5A1,1,0,0,0,20.5,4ZM8.5,19h-4v-3a1,1,0,0,0-2,0v4.5a1,1,0,0,0,1,1H8.5a1,1,0,0,0,0-2Zm13-4a1,1,0,0,0-1,1v3h-4a1,1,0,0,0,0,2h5a1,1,0,0,0,1-1V16A1,1,0,0,0,21.5,15Z"/></svg>');
+    background-repeat: no-repeat;
+    opacity: 0.5;
 }
 
 .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(230, 57, 70, 0.2);
+    box-shadow: 0 8px 15px rgba(230, 57, 70, 0.3);
+    border-color: rgba(230, 57, 70, 0.4);
 }
 
 .card-red {
@@ -289,4 +304,76 @@
     background-repeat: no-repeat;
     transform: rotate(15deg) scale(1.2);
     z-index: 1;
+}
+
+/* Animated pepper */
+.pepper-icon {
+    position: relative;
+    display: inline-block;
+    margin-right: 10px;
+    animation: pepper-bounce 2s infinite;
+}
+
+@keyframes pepper-bounce {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-5px) rotate(5deg); }
+    50% { transform: translateY(0) rotate(0deg); }
+    75% { transform: translateY(-3px) rotate(-5deg); }
+}
+
+/* Fire background effect */
+.fire-bg {
+    position: relative;
+    overflow: hidden;
+}
+
+.fire-bg::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(circle at 20% 50%, rgba(230, 57, 70, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 30%, rgba(230, 57, 70, 0.1) 0%, transparent 50%);
+    animation: fire-pulse 3s infinite alternate;
+    z-index: 0;
+}
+
+@keyframes fire-pulse {
+    0% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+/* Spicy label with animation */
+.spicy-label {
+    background-color: #e63946;
+    color: white;
+    padding: 0.3rem 0.7rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    box-shadow: 0 3px 6px rgba(230, 57, 70, 0.3);
+    animation: spicy-pulse 2s infinite;
+}
+
+.spicy-label::before {
+    content: "🌶️";
+    margin-right: 5px;
+    animation: pepper-shake 1s ease-in-out infinite;
+    display: inline-block;
+}
+
+@keyframes spicy-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes pepper-shake {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-10deg); }
+    75% { transform: rotate(10deg); }
 }

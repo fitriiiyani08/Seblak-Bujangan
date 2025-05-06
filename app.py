@@ -26,9 +26,12 @@ if os.path.exists("static/styles.css"):
 
 # Custom HTML untuk header
 st.markdown("""
-<div class="hero-section">
-    <div class="hero-title">📊 Manajemen Keuangan Seblak Bujangan</div>
+<div class="hero-section fire-bg">
+    <div class="hero-title"><span class="pepper-icon">🌶️</span> Manajemen Keuangan Seblak Bujangan</div>
     <div class="hero-subtitle">Solusi cerdas untuk manajemen keuangan usaha Seblak Anda</div>
+    <div style="margin-top: 20px;">
+        <span class="spicy-label">Extra Pedas!</span>
+    </div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -43,7 +46,7 @@ with st.sidebar:
     <div class="sidebar-gradient">
         <h2>Seblak Bujangan</h2>
         <p>Aplikasi pencatatan keuangan spesial untuk Seblak Bujangan</p>
-        <div class="hot-label" style="margin-top: 5px; display: inline-block;">🔥 Pedas!</div>
+        <div class="spicy-label" style="margin-top: 10px; display: inline-block;">Pedas Nendang!</div>
     </div>
     """, unsafe_allow_html=True)
     
@@ -154,7 +157,8 @@ with col4:
     )
 
 # Tampilkan grafik tren pendapatan & pengeluaran
-st.subheader("📈 Tren Keuangan (7 Hari Terakhir)")
+st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
+st.markdown('<div class="fitur-header"><span class="pepper-icon">🔥</span> Tren Keuangan (7 Hari Terakhir)</div>', unsafe_allow_html=True)
 
 # Dapatkan data 7 hari terakhir
 end_date = datetime.now()
