@@ -16,7 +16,7 @@ from utils import load_data, generate_monthly_report
 # Konfigurasi halaman
 st.set_page_config(
     page_title="Laporan Keuangan - Seblak Bujangan",
-    page_icon="🍜",
+    page_icon="static/images/logo.jpeg",
     layout="wide"
 )
 

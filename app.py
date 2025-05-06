@@ -9,8 +9,8 @@ from utils import load_data, save_data, calculate_profit_loss, get_summary
 
 # Konfigurasi halaman
 st.set_page_config(
-    page_title="Keuangan Seblak Bujangan",
-    page_icon="🍜",
+    page_title="Seblak Bujangan",
+    page_icon="static/images/logo.jpeg",
     layout="wide",
     initial_sidebar_state="expanded"
 )

@@ -12,7 +12,7 @@ from utils import load_data, save_data
 # Konfigurasi halaman
 st.set_page_config(
     page_title="Stok Bahan - Seblak Bujangan",
-    page_icon="🍜",
+    page_icon="static/images/logo.jpeg",
     layout="wide"
 )
 
