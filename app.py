@@ -39,7 +39,14 @@ with st.sidebar:
     else:
         st.image("https://img.icons8.com/color/96/000000/noodles.png", width=100)
     
-    st.markdown('<div class="sidebar-gradient"><h2>Seblak Bujangan</h2><p>Aplikasi pencatatan keuangan spesial untuk Seblak Bujangan</p></div>', unsafe_allow_html=True)
+    st.markdown("""
+    <div class="sidebar-gradient">
+        <h2>Seblak Bujangan</h2>
+        <p>Aplikasi pencatatan keuangan spesial untuk Seblak Bujangan</p>
+        <div class="hot-label" style="margin-top: 5px; display: inline-block;">🔥 Pedas!</div>
+    </div>
+    """, unsafe_allow_html=True)
+    
     st.markdown('<div class="fitur-header">Menu Navigasi</div>', unsafe_allow_html=True)
     
 # Inisialisasi data
@@ -50,29 +57,45 @@ if 'data_initialized' not in st.session_state:
     
     # Inisialisasi file keuangan jika belum ada
     if not os.path.exists("data/keuangan.csv"):
+        # Membuat contoh data awal untuk demonstrasi
+        today = datetime.now()
+        yesterday = today - timedelta(days=1)
+        two_days_ago = today - timedelta(days=2)
+        
         keuangan_df = pd.DataFrame({
-            'tanggal': [],
-            'jenis': [],
-            'kategori': [],
-            'deskripsi': [],
-            'jumlah': []
+            'tanggal': [
+                today, today, yesterday, yesterday, two_days_ago, two_days_ago
+            ],
+            'jenis': [
+                'Pendapatan', 'Pendapatan', 'Pendapatan', 'Pengeluaran', 'Pendapatan', 'Pengeluaran'
+            ],
+            'kategori': [
+                'Penjualan', 'Penjualan', 'Penjualan', 'Bahan Baku', 'Penjualan', 'Operasional'
+            ],
+            'deskripsi': [
+                'Seblak Original (5 porsi)', 'Seblak Seafood (3 porsi)', 'Seblak Spesial (7 porsi)', 
+                'Belanja Bahan', 'Seblak Original (10 porsi)', 'Biaya Listrik'
+            ],
+            'jumlah': [
+                75000, 75000, 140000, 200000, 150000, 50000
+            ]
         })
         keuangan_df.to_csv("data/keuangan.csv", index=False)
     
     # Inisialisasi file produk jika belum ada
     if not os.path.exists("data/produk.csv"):
         produk_df = pd.DataFrame({
-            'nama': ["Seblak Original", "Seblak Spesial", "Seblak Seafood", "Seblak Tulang", "Mie Instan"],
-            'harga': [15000, 20000, 25000, 18000, 10000]
+            'nama': ["Seblak Original", "Seblak Spesial", "Seblak Seafood", "Seblak Tulang", "Mie Instan", "Seblak Ceker", "Seblak Batagor"],
+            'harga': [15000, 20000, 25000, 18000, 10000, 22000, 20000]
         })
         produk_df.to_csv("data/produk.csv", index=False)
     
     # Inisialisasi file bahan jika belum ada
     if not os.path.exists("data/bahan.csv"):
         bahan_df = pd.DataFrame({
-            'nama': ["Kerupuk", "Mie", "Telur", "Bumbu", "Sayuran", "Bakso", "Sosis", "Seafood"],
-            'stok': [10, 20, 30, 5, 3, 15, 15, 10],
-            'satuan': ["kg", "kg", "kg", "kg", "kg", "kg", "kg", "kg"]
+            'nama': ["Kerupuk", "Mie", "Telur", "Bumbu", "Sayuran", "Bakso", "Sosis", "Seafood", "Ceker", "Batagor"],
+            'stok': [10, 20, 30, 5, 3, 15, 15, 10, 8, 12],
+            'satuan': ["kg", "kg", "kg", "kg", "kg", "kg", "kg", "kg", "kg", "bungkus"]
         })
         bahan_df.to_csv("data/bahan.csv", index=False)
         
