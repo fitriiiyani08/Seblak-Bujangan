@@ -16,16 +16,31 @@ st.set_page_config(
     layout="wide"
 )
 
-# Judul halaman
-st.title("📦 Manajemen Stok Bahan")
-st.markdown("Halaman ini untuk mencatat dan mengelola stok bahan untuk Seblak Bujangan.")
+# Custom CSS
+def load_css():
+    css_file = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "static/styles.css")
+    if os.path.exists(css_file):
+        with open(css_file, "r") as f:
+            st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+
+# Load custom CSS
+load_css()
+
+# Judul halaman dengan animasi cabai
+st.markdown("""
+<div class="hero-section fire-bg">
+    <div class="hero-title"><span class="pepper-icon">🌶️</span> Manajemen Stok Bahan</div>
+    <div class="hero-subtitle">Kelola persediaan bahan baku untuk Seblak Bujangan dengan mudah</div>
+</div>
+""", unsafe_allow_html=True)
 
 # Load data
 bahan_df = load_data("data/bahan.csv")
 keuangan_df = load_data("data/keuangan.csv")
 
 # Tampilkan stok bahan saat ini
-st.markdown("## 📋 Stok Bahan Saat Ini")
+st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
+st.markdown('<div class="fitur-header"><span class="pepper-icon">🌶️</span> Stok Bahan Saat Ini</div>', unsafe_allow_html=True)
 
 if not bahan_df.empty:
     # Tambahkan kolom status stok
@@ -99,7 +114,9 @@ else:
     st.info("Belum ada data stok bahan yang tersedia.")
 
 # Form untuk menambah/update stok bahan
-st.markdown("## ➕ Tambah/Update Stok Bahan")
+st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
+st.markdown('<div class="fitur-header"><span class="pepper-icon">🌶️</span> Tambah/Update Stok Bahan</div>', unsafe_allow_html=True)
+st.markdown('<div class="form-container fire-bg">', unsafe_allow_html=True)
 
 col1, col2, col3, col4 = st.columns(4)
 
@@ -214,8 +231,13 @@ if simpan_button:
         else:
             st.error(f"Bahan dengan nama '{bahan_nama}' sudah ada!")
 
+# Tutup form sebelumnya
+st.markdown('</div>', unsafe_allow_html=True)
+
 # Form untuk pengambilan stok untuk produksi
-st.markdown("## 🔄 Pengambilan Stok untuk Produksi")
+st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
+st.markdown('<div class="fitur-header"><span class="pepper-icon">🌶️</span> Pengambilan Stok untuk Produksi</div>', unsafe_allow_html=True)
+st.markdown('<div class="form-container">', unsafe_allow_html=True)
 
 col1, col2, col3 = st.columns(3)
 

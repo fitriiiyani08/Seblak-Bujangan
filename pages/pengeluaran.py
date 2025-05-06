@@ -17,15 +17,31 @@ st.set_page_config(
     layout="wide"
 )
 
-# Judul halaman
-st.title("💸 Pencatatan Pengeluaran")
-st.markdown("Halaman ini untuk mencatat semua pengeluaran dan melihat data pengeluaran.")
+# Custom CSS
+def load_css():
+    css_file = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "static/styles.css")
+    if os.path.exists(css_file):
+        with open(css_file, "r") as f:
+            st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+
+# Load custom CSS
+load_css()
+
+# Judul halaman dengan animasi cabai
+st.markdown("""
+<div class="hero-section spicy-bg">
+    <div class="hero-title"><span class="pepper-icon">🔥</span> Pencatatan Pengeluaran</div>
+    <div class="hero-subtitle">Kontrol pengeluaran usaha Seblak Bujangan dengan mudah dan terorganisir</div>
+</div>
+""", unsafe_allow_html=True)
 
 # Load data
 keuangan_df = load_data("data/keuangan.csv")
 
 # Form pencatatan pengeluaran
-st.markdown("## ✏️ Catat Pengeluaran Baru")
+st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
+st.markdown('<div class="fitur-header"><span class="pepper-icon">🔥</span> Catat Pengeluaran Baru</div>', unsafe_allow_html=True)
+st.markdown('<div class="form-container spicy-gradient">', unsafe_allow_html=True)
 col1, col2, col3 = st.columns(3)
 
 with col1:
@@ -66,8 +82,12 @@ if simpan_button:
         # Reload data
         keuangan_df = load_data("data/keuangan.csv")
 
+# Tutup form sebelumnya
+st.markdown('</div>', unsafe_allow_html=True)
+
 # Tampilkan data pengeluaran
-st.markdown("## 📋 Riwayat Pengeluaran")
+st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
+st.markdown('<div class="fitur-header"><span class="pepper-icon">🌶️</span> Riwayat Pengeluaran</div>', unsafe_allow_html=True)
 
 # Filter untuk data pengeluaran saja
 if not keuangan_df.empty:
