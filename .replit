@@ -20,6 +20,14 @@ author = "agent"
 task = "workflow.run"
 args = "Server"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "SettingUpNPM"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Setup"
+
 [[workflows.workflow]]
 name = "Server"
 author = "agent"
@@ -28,6 +36,22 @@ author = "agent"
 task = "shell.exec"
 args = "streamlit run app.py --server.port 5000"
 waitForPort = 5000
+
+[[workflows.workflow]]
+name = "SettingUpNPM"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "node -e \"console.log('NPM sudah siap digunakan')\""
+
+[[workflows.workflow]]
+name = "Setup"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "node setup.js"
 
 [[ports]]
 localPort = 5000
