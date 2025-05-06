@@ -1,8 +1,6 @@
 /**
  * Setup script untuk aplikasi Seblak Bujangan
  * Script ini membantu menyiapkan lingkungan dan instalasi dependencies
- * 
- * Untuk menjalankan script ini, gunakan: node setup.js atau npm run setup
  */
 
 const spawn = require('cross-spawn');
@@ -57,11 +55,11 @@ async function installDependencies() {
   console.log('📦 Menginstall dependencies Python...');
   
   try {
-    await runCommand('pip', ['install', 'streamlit', 'pandas', 'numpy', 'plotly', 'plotly-express', 'python-dateutil', 'matplotlib']);
+    await runCommand('pip', ['install', 'streamlit', 'pandas', 'numpy', 'plotly', 'python-dateutil']);
     console.log('✅ Dependencies Python berhasil diinstall');
   } catch (error) {
     console.error('❌ Gagal menginstall dependencies Python:', error.message);
-    console.log('💡 Coba jalankan manual: pip install streamlit pandas numpy plotly plotly-express python-dateutil matplotlib');
+    console.log('💡 Coba jalankan manual: pip install streamlit pandas numpy plotly python-dateutil');
   }
 }
 

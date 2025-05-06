@@ -1,77 +1,79 @@
 #!/bin/bash
-# Script untuk instalasi aplikasi Seblak Bujangan pada macOS dan Linux
+
+# Warna untuk output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+NC='\033[0m' # No Color
 
 echo "========================================"
 echo "  Instalasi Aplikasi Seblak Bujangan"
 echo "========================================"
 echo ""
 
-# Cek ketersediaan Python
+# Cek apakah Python terinstall
 if ! command -v python3 &> /dev/null; then
-    echo "[ERROR] Python tidak terdeteksi di sistem Anda."
-    echo "Silakan install Python 3.7 atau lebih baru."
+    echo -e "${RED}ERROR: Python tidak terinstall di sistem Anda.${NC}"
+    echo "Silakan install Python 3.7 atau yang lebih baru."
     echo ""
     exit 1
 fi
 
-# Cek ketersediaan Node.js
+# Cek apakah Node.js terinstall
 if ! command -v node &> /dev/null; then
-    echo "[ERROR] Node.js tidak terdeteksi di sistem Anda."
+    echo -e "${RED}ERROR: Node.js tidak terinstall di sistem Anda.${NC}"
     echo "Silakan install Node.js dari https://nodejs.org/"
     echo ""
     exit 1
 fi
 
-echo "[INFO] Python dan Node.js terdeteksi. Melanjutkan instalasi..."
+echo -e "${GREEN}[INFO] Python dan Node.js terdeteksi. Melanjutkan instalasi...${NC}"
 echo ""
 
-# Membuat virtual environment
-echo "[PROSES] Membuat virtual environment Python..."
+# Buat virtual environment Python
+echo -e "${YELLOW}[INFO] Membuat virtual environment Python...${NC}"
 python3 -m venv venv
 if [ $? -ne 0 ]; then
-    echo "[ERROR] Gagal membuat virtual environment."
-    echo "Coba install virtualenv terlebih dahulu dengan: pip3 install virtualenv"
+    echo -e "${RED}ERROR: Gagal membuat virtual environment.${NC}"
+    echo "Coba jalankan: pip install virtualenv"
     echo ""
     exit 1
 fi
 
 # Aktifkan virtual environment
-echo "[PROSES] Mengaktifkan virtual environment..."
+echo -e "${YELLOW}[INFO] Mengaktifkan virtual environment...${NC}"
 source venv/bin/activate
 
 # Install dependencies Python
-echo "[PROSES] Menginstall dependencies Python..."
-pip install streamlit pandas numpy plotly plotly-express python-dateutil matplotlib
+echo -e "${YELLOW}[INFO] Menginstall dependencies Python...${NC}"
+pip install streamlit pandas numpy plotly python-dateutil
 if [ $? -ne 0 ]; then
-    echo "[ERROR] Gagal menginstall dependencies Python."
+    echo -e "${RED}ERROR: Gagal menginstall dependencies Python.${NC}"
     echo ""
     exit 1
 fi
 
 # Install dependencies Node.js
-echo "[PROSES] Menginstall dependencies Node.js..."
-npm install
+echo -e "${YELLOW}[INFO] Menginstall dependencies Node.js...${NC}"
+npm install cross-spawn fs-extra
 if [ $? -ne 0 ]; then
-    echo "[ERROR] Gagal menginstall dependencies Node.js."
+    echo -e "${RED}ERROR: Gagal menginstall dependencies Node.js.${NC}"
     echo ""
     exit 1
 fi
 
-echo ""
-echo "========================================"
-echo "  Instalasi Selesai!"
-echo "========================================"
-echo ""
-echo "Untuk menjalankan aplikasi:"
-echo "1. Buka Terminal di folder ini"
-echo "2. Jalankan perintah: ./run.sh"
-echo ""
-
-# Buat run.sh executable
+# Memberikan hak eksekusi pada script run.sh
 chmod +x run.sh
 
-# Deaktivasi virtual environment
-deactivate
-
-echo "Tekan Enter untuk keluar..."
-read
+# Verifikasi instalasi
+echo ""
+echo -e "${GREEN}========================================${NC}"
+echo -e "${GREEN}  Instalasi Selesai!${NC}"
+echo -e "${GREEN}========================================${NC}"
+echo ""
+echo "Untuk menjalankan aplikasi:"
+echo "1. Aktifkan virtual environment dengan menjalankan 'source venv/bin/activate'"
+echo "2. Jalankan aplikasi dengan perintah 'node start.js'"
+echo ""
+echo "Atau cukup jalankan './run.sh' untuk menjalankan aplikasi secara langsung"
+echo ""

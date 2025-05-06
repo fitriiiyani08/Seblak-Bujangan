@@ -56,7 +56,7 @@ Write-Host "Mengaktifkan virtual environment..." -ForegroundColor Yellow
 
 # Install dependencies Python
 Write-Host "Menginstall dependencies Python..." -ForegroundColor Yellow
-pip install streamlit pandas numpy plotly plotly-express python-dateutil matplotlib
+pip install streamlit pandas numpy plotly python-dateutil
 if ($LASTEXITCODE -ne 0) {
     Write-Host "Gagal menginstall dependencies Python." -ForegroundColor Red
     Write-Host ""
