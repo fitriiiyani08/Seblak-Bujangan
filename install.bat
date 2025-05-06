@@ -47,7 +47,7 @@ call venv\Scripts\activate.bat
 
 REM Install dependencies Python
 echo [PROSES] Menginstall dependencies Python...
-pip install streamlit pandas numpy plotly python-dateutil
+pip install streamlit pandas numpy plotly plotly-express python-dateutil matplotlib
 if %ERRORLEVEL% NEQ 0 (
     echo [ERROR] Gagal menginstall dependencies Python.
     echo.

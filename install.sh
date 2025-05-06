@@ -41,7 +41,7 @@ source venv/bin/activate
 
 # Install dependencies Python
 echo "[PROSES] Menginstall dependencies Python..."
-pip install streamlit pandas numpy plotly python-dateutil
+pip install streamlit pandas numpy plotly plotly-express python-dateutil matplotlib
 if [ $? -ne 0 ]; then
     echo "[ERROR] Gagal menginstall dependencies Python."
     echo ""

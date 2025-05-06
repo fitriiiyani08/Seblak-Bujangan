@@ -57,11 +57,11 @@ async function installDependencies() {
   console.log('📦 Menginstall dependencies Python...');
   
   try {
-    await runCommand('pip', ['install', 'streamlit', 'pandas', 'numpy', 'plotly', 'python-dateutil']);
+    await runCommand('pip', ['install', 'streamlit', 'pandas', 'numpy', 'plotly', 'plotly-express', 'python-dateutil', 'matplotlib']);
     console.log('✅ Dependencies Python berhasil diinstall');
   } catch (error) {
     console.error('❌ Gagal menginstall dependencies Python:', error.message);
-    console.log('💡 Coba jalankan manual: pip install streamlit pandas numpy plotly python-dateutil');
+    console.log('💡 Coba jalankan manual: pip install streamlit pandas numpy plotly plotly-express python-dateutil matplotlib');
   }
 }
 
