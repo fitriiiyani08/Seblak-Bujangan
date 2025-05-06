@@ -27,6 +27,10 @@ if os.path.exists("static/styles.css"):
 # Custom HTML untuk header
 st.markdown("""
 <div class="hero-section fire-bg">
+    <div class="floating-pepper" style="top: 10%; left: 10%;">🌶️</div>
+    <div class="floating-pepper" style="top: 20%; left: 70%;">🌶️</div>
+    <div class="floating-pepper" style="top: 60%; left: 30%;">🔥</div>
+    <div class="floating-pepper" style="top: 70%; left: 80%;">🌶️</div>
     <div class="hero-title"><span class="pepper-icon">🌶️</span> Manajemen Keuangan Seblak Bujangan</div>
     <div class="hero-subtitle">Solusi cerdas untuk manajemen keuangan usaha Seblak Anda</div>
     <div style="margin-top: 20px;">
@@ -44,6 +48,8 @@ with st.sidebar:
     
     st.markdown("""
     <div class="sidebar-gradient">
+        <div class="floating-pepper" style="top: 10%; right: 10%;">🌶️</div>
+        <div class="floating-pepper" style="bottom: 20%; left: 15%;">🔥</div>
         <h2>Seblak Bujangan</h2>
         <p>Aplikasi pencatatan keuangan spesial untuk Seblak Bujangan</p>
         <div class="spicy-label" style="margin-top: 10px; display: inline-block;">Pedas Nendang!</div>
