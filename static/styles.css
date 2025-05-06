@@ -1,0 +1,225 @@
+/* Custom styles for Seblak Bujangan app */
+
+/* Custom card styling */
+.card {
+    border-radius: 10px;
+    border: 1px solid rgba(230, 57, 70, 0.2);
+    padding: 1.5rem;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(230, 57, 70, 0.2);
+}
+
+.card-red {
+    border-left: 5px solid #e63946;
+}
+
+.card-green {
+    border-left: 5px solid #2ecc71;
+}
+
+.card-blue {
+    border-left: 5px solid #3498db;
+}
+
+.card-orange {
+    border-left: 5px solid #ff9f43;
+}
+
+/* Metric styling */
+.metric-container {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+    border: 1px solid rgba(230, 57, 70, 0.2);
+}
+
+.metric-title {
+    font-size: 1rem;
+    color: #777;
+    margin-bottom: 0.5rem;
+}
+
+.metric-value {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #e63946;
+}
+
+/* Fitur section styling */
+.fitur-header {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #e63946;
+    border-bottom: 2px solid #e63946;
+    padding-bottom: 0.5rem;
+}
+
+/* Gradient background for sidebar */
+.sidebar-gradient {
+    background: linear-gradient(180deg, #e63946 0%, #ba181b 100%);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+/* Button styling */
+.custom-button {
+    background-color: #e63946;
+    color: white;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.custom-button:hover {
+    background-color: #ba181b;
+}
+
+/* Table styling */
+.styled-table {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Animation effects */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Section dividers */
+.section-divider {
+    height: 3px;
+    background: linear-gradient(90deg, rgba(230, 57, 70, 0.8) 0%, rgba(230, 57, 70, 0.1) 100%);
+    margin: 2rem 0;
+    border-radius: 3px;
+}
+
+/* Scroll bar styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #e63946;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #ba181b;
+}
+
+/* Logo container */
+.logo-container {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.logo-container img {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 100%;
+}
+
+/* Spicy hot label */
+.hot-label {
+    background-color: #e63946;
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+}
+
+/* Dashboard cards animation */
+.dashboard-card {
+    transition: all 0.3s ease;
+}
+
+.dashboard-card:hover {
+    transform: scale(1.02);
+}
+
+/* Category pills */
+.category-pill {
+    display: inline-block;
+    padding: 0.2rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    background-color: rgba(230, 57, 70, 0.1);
+    color: #e63946;
+}
+
+/* Status badges */
+.status-badge {
+    padding: 0.2rem 0.5rem;
+    border-radius: 5px;
+    font-size: 0.8rem;
+}
+
+.status-available {
+    background-color: rgba(46, 204, 113, 0.2);
+    color: #2ecc71;
+}
+
+.status-low {
+    background-color: rgba(230, 57, 70, 0.2);
+    color: #e63946;
+}
+
+/* Form styling */
+.form-container {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+}
+
+/* Hero section for homepage */
+.hero-section {
+    background: linear-gradient(135deg, #e63946 0%, #ba181b 100%);
+    color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.hero-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}

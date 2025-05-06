@@ -20,9 +20,23 @@ st.set_page_config(
     layout="wide"
 )
 
-# Judul halaman
-st.title("📊 Laporan Keuangan")
-st.markdown("Halaman ini untuk melihat laporan keuangan usaha Seblak Bujangan.")
+# Custom CSS
+def load_css():
+    css_file = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "static/styles.css")
+    if os.path.exists(css_file):
+        with open(css_file, "r") as f:
+            st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+
+# Load custom CSS
+load_css()
+
+# Custom header
+st.markdown("""
+<div class="hero-section">
+    <div class="hero-title">📊 Laporan Keuangan</div>
+    <div class="hero-subtitle">Analisis lengkap keuangan usaha Seblak Bujangan</div>
+</div>
+""", unsafe_allow_html=True)
 
 # Load data
 keuangan_df = load_data("data/keuangan.csv")

@@ -15,15 +15,32 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Judul aplikasi
-st.title("📊 Manajemen Keuangan Seblak Bujangan")
+# Custom CSS
+def load_css():
+    with open("static/styles.css", "r") as f:
+        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+
+# Load custom CSS
+if os.path.exists("static/styles.css"):
+    load_css()
+
+# Custom HTML untuk header
+st.markdown("""
+<div class="hero-section">
+    <div class="hero-title">📊 Manajemen Keuangan Seblak Bujangan</div>
+    <div class="hero-subtitle">Solusi cerdas untuk manajemen keuangan usaha Seblak Anda</div>
+</div>
+""", unsafe_allow_html=True)
 
 # Sidebar
 with st.sidebar:
-    st.image("https://img.icons8.com/color/96/000000/noodles.png", width=100)
-    st.header("Seblak Bujangan")
-    st.markdown("---")
-    st.markdown("### Menu Navigasi")
+    if os.path.exists("static/images/logo.jpeg"):
+        st.markdown('<div class="logo-container"><img src="static/images/logo.jpeg" alt="Logo Seblak Bujangan"></div>', unsafe_allow_html=True)
+    else:
+        st.image("https://img.icons8.com/color/96/000000/noodles.png", width=100)
+    
+    st.markdown('<div class="sidebar-gradient"><h2>Seblak Bujangan</h2><p>Aplikasi pencatatan keuangan spesial untuk Seblak Bujangan</p></div>', unsafe_allow_html=True)
+    st.markdown('<div class="fitur-header">Menu Navigasi</div>', unsafe_allow_html=True)
     
 # Inisialisasi data
 if 'data_initialized' not in st.session_state:
@@ -311,7 +328,7 @@ if submit_button:
         st.rerun()
 
 # Tampilkan transaksi terbaru
-st.subheader("📋 Transaksi Terbaru")
+st.markdown('<div class="fitur-header">📋 Transaksi Terbaru</div>', unsafe_allow_html=True)
 
 if not keuangan_df.empty:
     # Urutkan transaksi dari yang terbaru
@@ -330,18 +347,26 @@ if not keuangan_df.empty:
     
     # Tampilkan transaksi dalam bentuk cards
     for i, row in sorted_df.iterrows():
-        col1, col2, col3 = st.columns([1, 2, 1])
+        # Custom card styling for each transaction
+        card_class = "card-red" if row['jenis'] == 'Pengeluaran' else "card-green"
+        jenis_badge = "🔴 Pengeluaran" if row['jenis'] == 'Pengeluaran' else "🟢 Pendapatan"
         
-        with col1:
-            st.markdown(f"**{row['tanggal']}**")
-            st.markdown(f"*{row['kategori']}*")
-        
-        with col2:
-            st.markdown(f"**{row['deskripsi']}**")
-        
-        with col3:
-            st.markdown(f"<h4 style='color: {row['color']}'>{row['jumlah_fmt']}</h4>", unsafe_allow_html=True)
-        
-        st.markdown("---")
+        st.markdown(f"""
+        <div class="card {card_class} dashboard-card fade-in">
+            <div class="row">
+                <div class="col-3">
+                    <strong>{row['tanggal']}</strong><br/>
+                    <span class="category-pill">{row['kategori']}</span>
+                </div>
+                <div class="col-6">
+                    <strong>{row['deskripsi']}</strong><br/>
+                    <small>{jenis_badge}</small>
+                </div>
+                <div class="col-3" style="text-align: right;">
+                    <h3 style="color: {row['color']}; margin: 0;">{row['jumlah_fmt']}</h3>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 else:
     st.info("Belum ada transaksi yang dicatat.")
