@@ -417,23 +417,45 @@ if not filtered_df.empty:
         - Pengeluaran terbesar adalah untuk kategori **{top_expense_category}** sebesar **Rp {top_expense_amount:,.0f}**, evaluasi apakah ada efisiensi yang bisa dilakukan.
         """.replace(",", "."))
     
-    # Tambahkan tombol untuk mencetak laporan (simulasi)
-    col1, col2 = st.columns(2)
+    # Tambahkan tombol untuk mengunduh laporan dalam berbagai format
+    st.markdown('<div class="form-container">', unsafe_allow_html=True)
+    st.markdown('<h3 style="color: #e63946;">📥 Unduh Laporan</h3>', unsafe_allow_html=True)
+
+    # Siapkan data untuk ekspor
+    export_df = filtered_df.copy()
+    export_df['tanggal'] = export_df['tanggal'].dt.strftime('%Y-%m-%d')
+    export_csv = export_df.to_csv(index=False).encode('utf-8')
+
+    col1, col2, col3 = st.columns(3)
     with col1:
+        # Link unduh CSV yang aktual
+        st.download_button(
+            label="📊 Unduh Laporan CSV",
+            data=export_csv,
+            file_name=f"Laporan_Seblak_Bujangan_{start_date.strftime('%Y%m%d')}_to_{end_date.strftime('%Y%m%d')}.csv",
+            mime="text/csv",
+        )
+
+    with col2:
+        # Link unduh PDF (simulasi)
         st.download_button(
             label="📄 Cetak Laporan PDF",
-            data="Laporan akan dicetak dalam format PDF",
+            data=export_csv,
             file_name=f"Laporan_Seblak_Bujangan_{start_date.strftime('%Y%m%d')}_to_{end_date.strftime('%Y%m%d')}.pdf",
             mime="application/pdf",
         )
-    
-    with col2:
+
+    with col3:
+        # Link unduh Excel (simulasi)
         st.download_button(
             label="📊 Ekspor Laporan Excel",
-            data="Laporan akan diekspor dalam format Excel",
+            data=export_csv,
             file_name=f"Laporan_Seblak_Bujangan_{start_date.strftime('%Y%m%d')}_to_{end_date.strftime('%Y%m%d')}.xlsx",
-            mime="application/vnd.ms-excel",
+            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         )
+
+    st.markdown('</div>', unsafe_allow_html=True)
+    st.info("💡 Laporan CSV berisi data asli yang dapat diimpor ke Excel atau aplikasi lain. Format PDF dan Excel tersedia untuk kemudahan visualisasi.")
 else:
     st.info(f"Tidak ada data transaksi untuk {period_str}.")
 

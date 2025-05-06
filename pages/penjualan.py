@@ -17,16 +17,31 @@ st.set_page_config(
     layout="wide"
 )
 
-# Judul halaman
-st.title("📊 Pencatatan Penjualan")
-st.markdown("Halaman ini untuk mencatat semua penjualan dan melihat data penjualan.")
+# Custom CSS
+def load_css():
+    css_file = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "static/styles.css")
+    if os.path.exists(css_file):
+        with open(css_file, "r") as f:
+            st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+
+# Load custom CSS
+load_css()
+
+# Custom header
+st.markdown("""
+<div class="hero-section">
+    <div class="hero-title">📊 Pencatatan Penjualan</div>
+    <div class="hero-subtitle">Catat dan analisis penjualan Seblak Bujangan dengan mudah</div>
+</div>
+""", unsafe_allow_html=True)
 
 # Load data
 keuangan_df = load_data("data/keuangan.csv")
 produk_df = load_data("data/produk.csv")
 
 # Form pencatatan penjualan
-st.markdown("## ✏️ Catat Penjualan Baru")
+st.markdown('<div class="fitur-header">✏️ Catat Penjualan Baru</div>', unsafe_allow_html=True)
+st.markdown('<div class="form-container">', unsafe_allow_html=True)
 col1, col2, col3 = st.columns(3)
 
 with col1:
@@ -71,6 +86,8 @@ if simpan_button:
         
         # Reload data
         keuangan_df = load_data("data/keuangan.csv")
+        
+st.markdown('</div>', unsafe_allow_html=True)
 
 # Tampilkan data penjualan
 st.markdown("## 📋 Riwayat Penjualan")
@@ -190,7 +207,9 @@ else:
     st.info("Belum ada data penjualan yang dicatat.")
 
 # Tambahkan formulir untuk menambah produk baru
-st.markdown("## ➕ Tambah Produk Baru")
+st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
+st.markdown('<div class="fitur-header">➕ Tambah Produk Baru</div>', unsafe_allow_html=True)
+st.markdown('<div class="form-container">', unsafe_allow_html=True)
 
 col1, col2, col3 = st.columns(3)
 
@@ -227,3 +246,5 @@ if add_product_button:
             
             st.success(f"Produk '{new_product_name}' berhasil ditambahkan!")
             st.rerun()
+
+st.markdown('</div>', unsafe_allow_html=True)

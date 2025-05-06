@@ -1,5 +1,37 @@
 /* Custom styles for Seblak Bujangan app */
 
+/* Global styles override */
+.stApp {
+    background-color: #f9f5f5;
+}
+
+.stButton>button {
+    background-color: #e63946;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.stButton>button:hover {
+    background-color: #ba181b;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.stSelectbox, .stNumberInput, .stDateInput, .stTextInput {
+    background-color: white;
+    border-radius: 5px;
+    transition: all 0.2s ease;
+}
+
+.stSelectbox:focus, .stNumberInput:focus, .stDateInput:focus, .stTextInput:focus {
+    border-color: #e63946;
+    box-shadow: 0 0 0 2px rgba(230, 57, 70, 0.2);
+}
+
 /* Custom card styling */
 .card {
     border-radius: 10px;
@@ -211,15 +243,50 @@
     border-radius: 10px;
     margin-bottom: 2rem;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30%;
+    height: 100%;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="rgba(255,255,255,0.1)"><path d="M18 5V2H6v3H2v4h1v10h18V9h1V5h-4zM8 4h8v1H8V4z"/></svg>');
+    background-repeat: repeat;
+    background-size: 50px 50px;
+    opacity: 0.2;
+    transform: rotate(-10deg);
 }
 
 .hero-title {
     font-size: 2.5rem;
     font-weight: bold;
     margin-bottom: 1rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .hero-subtitle {
     font-size: 1.2rem;
     opacity: 0.9;
+}
+
+/* Hot sauce splatter effect for accents */
+.hot-splatter {
+    position: relative;
+}
+
+.hot-splatter::after {
+    content: "";
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    width: 30px;
+    height: 30px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="%23e63946"><path d="M20,14.05A10,10,0,0,0,9.95,4C6.83,4,4.26,6,3.33,9H5.19c.39-1.67,1.51-3,3.45-3a5,5,0,0,1,5,5,5,5,0,0,1-4.95,5c-1.94,0-3.06-1.33-3.45-3H3.33c.93,3,3.5,5,6.62,5A10,10,0,0,0,20,14.05Z"/></svg>');
+    background-repeat: no-repeat;
+    transform: rotate(15deg) scale(1.2);
+    z-index: 1;
 }
