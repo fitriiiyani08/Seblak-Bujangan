@@ -1,29 +1,29 @@
 # Aplikasi Seblak Bujangan
 
-## Panduan Instalasi dan Penggunaan Windows
+## Panduan Instalasi dan Penggunaan Windows (Cara Termudah)
 
 ### Prasyarat
 Sebelum menginstall aplikasi ini, pastikan komputer Anda telah memiliki:
 - Python 3.7 atau lebih baru (Download: https://www.python.org/downloads/)
-- Node.js (Download: https://nodejs.org/)
+  Pastikan centang opsi "Add Python to PATH" saat instalasi
 
-### Cara Instalasi (Opsi Mudah)
-1. Klik kanan pada file `install-seblak.ps1`
-2. Pilih "Run with PowerShell"
-3. Tunggu hingga proses instalasi selesai
-4. Jika muncul pesan tentang policy, ketik "Y" lalu Enter
+### Cara Instalasi Sangat Mudah (Klik 2x pada file batch)
+1. Double-click pada file `install-seblak.bat`
+2. Tunggu hingga proses instalasi selesai
+3. Ketik "y" jika ditanya apakah ingin menjalankan aplikasi sekarang
 
-### Cara Menjalankan Aplikasi (Opsi Mudah)
-1. Klik kanan pada file `run-seblak.ps1`
-2. Pilih "Run with PowerShell"
-3. Aplikasi akan terbuka di browser Anda pada alamat http://localhost:5000
-4. Untuk menghentikan aplikasi, tekan CTRL+C di jendela PowerShell
+### Cara Menjalankan Aplikasi (Sangat Mudah)
+1. Double-click pada file `jalankan-seblak.bat`
+2. Aplikasi akan terbuka di browser Anda pada alamat http://localhost:5000
+3. Untuk menghentikan aplikasi, tekan CTRL+C di jendela command prompt
 
-### Jika Ada Masalah Dengan PowerShell
-Jika PowerShell tidak bisa menjalankan script karena kebijakan keamanan, buka PowerShell sebagai Administrator dan jalankan:
-```
-Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
-```
+### Instalasi Alternatif dengan PowerShell (Jika Dibutuhkan)
+Jika Anda lebih suka menggunakan PowerShell:
+1. Klik kanan file `install-seblak.ps1`, pilih "Run with PowerShell"
+2. Jika muncul error tentang kebijakan keamanan, jalankan PowerShell sebagai Administrator dan ketik:
+   ```
+   Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+   ```
 
 ### Backup Data
 Semua data aplikasi disimpan di folder `data`. Untuk backup, cukup salin folder tersebut.
