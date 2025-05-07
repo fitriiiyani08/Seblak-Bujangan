@@ -14,13 +14,37 @@ if (!fs.existsSync(path.join(__dirname, 'data'))) {
 }
 
 // Cek apakah structure direktori lainnya ada
-const requiredDirs = ['pages', 'static'];
+const requiredDirs = ['pages', 'static', 'static/images'];
 requiredDirs.forEach(dir => {
   if (!fs.existsSync(path.join(__dirname, dir))) {
-    fs.mkdirSync(path.join(__dirname, dir));
+    fs.mkdirSync(path.join(__dirname, dir), { recursive: true });
     console.log(`✅ Folder ${dir} berhasil dibuat`);
   }
 });
+
+// Cek file data pesanan
+const pesananPath = path.join(__dirname, 'data', 'pesanan.csv');
+if (!fs.existsSync(pesananPath)) {
+  console.log('📝 Membuat file data/pesanan.csv...');
+  const pesananHeader = 'id,tanggal,nama_pembeli,produk,jumlah,harga_total,tingkat_kepedasan,catatan,metode_pembayaran,status_pesanan,tipe_pesanan,waktu_pemesanan,waktu_selesai';
+  fs.writeFileSync(pesananPath, pesananHeader);
+}
+
+// Cek file data produk
+const produkPath = path.join(__dirname, 'data', 'produk.csv');
+if (!fs.existsSync(produkPath)) {
+  console.log('📝 Membuat file data/produk.csv...');
+  const produkData = `nama,harga,deskripsi
+Seblak Original,15000,Seblak Original dengan kerupuk dan telur
+Seblak Seafood,20000,Seblak dengan tambahan seafood (cumi udang dsb)
+Seblak Komplit,25000,Seblak dengan semua topping
+Seblak Mie,18000,Seblak dengan tambahan mie
+Seblak Ayam,17000,Seblak dengan tambahan potongan ayam
+Seblak Tulang,16000,Seblak dengan tambahan tulang rawan
+Seblak Baso,16500,Seblak dengan tambahan baso sapi
+Seblak Ceker,15500,Seblak dengan tambahan ceker ayam`;
+  fs.writeFileSync(produkPath, produkData);
+}
 
 console.log('🚀 Menjalankan aplikasi Seblak Bujangan...');
 console.log('⏳ Mohon tunggu sebentar, aplikasi sedang dimuat...');

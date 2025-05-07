@@ -1,6 +1,9 @@
-nama,harga
-Seblak Original,15000
-Seblak Spesial,20000
-Seblak Seafood,25000
-Seblak Tulang,18000
-Mie Instan,10000
+nama,harga,deskripsi
+Seblak Original,15000,Seblak Original dengan kerupuk dan telur
+Seblak Seafood,20000,Seblak dengan tambahan seafood (cumi udang dsb)
+Seblak Komplit,25000,Seblak dengan semua topping
+Seblak Mie,18000,Seblak dengan tambahan mie
+Seblak Ayam,17000,Seblak dengan tambahan potongan ayam
+Seblak Tulang,16000,Seblak dengan tambahan tulang rawan
+Seblak Baso,16500,Seblak dengan tambahan baso sapi
+Seblak Ceker,15500,Seblak dengan tambahan ceker ayam
