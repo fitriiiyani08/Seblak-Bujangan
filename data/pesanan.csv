@@ -1,1 +1,2 @@
-id,tanggal,nama_pembeli,produk,jumlah,harga_total,tingkat_kepedasan,catatan,metode_pembayaran,status_pesanan,tipe_pesanan,waktu_pemesanan,waktu_selesai
+id,tanggal,nama_pembeli,produk,jumlah,harga_total,tingkat_kepedasan,catatan,metode_pembayaran,status_pesanan,tipe_pesanan,waktu_pemesanan,waktu_selesai,disinkronkan
+16099b53,2025-05-07,Oin,Prasmanan,1,21000,Pedas,,Tunai,Selesai,Dine In,02:02:30,02:02:57,True

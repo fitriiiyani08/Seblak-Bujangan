@@ -6,6 +6,7 @@ import plotly.graph_objects as go
 from datetime import datetime, timedelta
 import os
 from utils import load_data, save_data, calculate_profit_loss, get_summary
+from sync_data import run_auto_sync, check_pending_sync
 
 # Konfigurasi halaman
 st.set_page_config(
@@ -109,6 +110,15 @@ if 'data_initialized' not in st.session_state:
         bahan_df.to_csv("data/bahan.csv", index=False)
         
     st.session_state.data_initialized = True
+
+# Jalankan sinkronisasi otomatis ketika aplikasi dimulai
+# Ini akan menyinkronkan pesanan dengan data penjualan
+run_auto_sync()
+
+# Periksa apakah ada pesanan yang belum disinkronkan
+pending_count = check_pending_sync()
+if pending_count > 0:
+    st.sidebar.warning(f"{pending_count} pesanan menunggu sinkronisasi. Silakan selesaikan di halaman Pesanan.")
 
 # Load data
 keuangan_df = load_data("data/keuangan.csv")

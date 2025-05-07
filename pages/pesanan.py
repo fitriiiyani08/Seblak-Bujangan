@@ -17,6 +17,7 @@ from utils_pesanan import (
     update_status_pesanan, get_statistik_pesanan, get_pesanan_aktif,
     get_laporan_harian, get_produk_terlaris
 )
+from sync_data import check_pending_sync, manual_sync
 
 # Fungsi untuk memuat CSS
 def load_css():
@@ -228,7 +229,15 @@ with tab2:
                     if pesanan['status_pesanan'] in ["Dalam Proses", "Siap"]:
                         if st.button("Tandai Selesai", key=f"selesai_{pesanan['id']}"):
                             update_status_pesanan(pesanan['id'], "Selesai")
-                            st.success("Pesanan selesai!")
+                            
+                            # Sinkronisasi dengan penjualan dan laporan
+                            with st.spinner("Menyinkronkan dengan data penjualan..."):
+                                result, _ = manual_sync()
+                                if result:
+                                    st.success("Pesanan selesai dan sudah disinkronkan dengan data penjualan!")
+                                else:
+                                    st.warning("Pesanan selesai, tetapi gagal sinkronisasi. Coba lagi nanti.")
+                            
                             time.sleep(1)
                             st.rerun()
             
@@ -237,6 +246,22 @@ with tab2:
 # Riwayat Pesanan (Tab 3)
 with tab3:
     st.markdown('<h3 class="cream-text">Riwayat Pesanan</h3>', unsafe_allow_html=True)
+    
+    # Tambahkan tombol sinkronisasi manual
+    pending_count = check_pending_sync()
+    if pending_count > 0:
+        if st.button(f"🔄 Sinkronkan {pending_count} Pesanan ke Data Penjualan", type="primary"):
+            with st.spinner("Menyinkronkan pesanan ke data penjualan..."):
+                result, remaining = manual_sync()
+                if result:
+                    if remaining == 0:
+                        st.success("Semua pesanan berhasil disinkronkan ke data penjualan!")
+                    else:
+                        st.warning(f"Beberapa pesanan berhasil disinkronkan, tetapi masih ada {remaining} pesanan yang belum.")
+                else:
+                    st.error("Gagal menyinkronkan pesanan. Coba lagi nanti.")
+    else:
+        st.info("Semua pesanan sudah disinkronkan dengan data penjualan.")
     
     # Filter tanggal
     col1, col2 = st.columns(2)
