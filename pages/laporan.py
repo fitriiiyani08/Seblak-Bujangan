@@ -222,8 +222,15 @@ if not filtered_df.empty:
         # Kategori pendapatan
         kategori_pendapatan = pendapatan_df.groupby('kategori')['jumlah'].sum().reset_index()
         
-        # Produk terlaris
-        pendapatan_df['nama_produk'] = pendapatan_df['deskripsi'].str.split(' (').str[0]
+        # Produk terlaris dengan penanganan error
+        try:
+            pendapatan_df['nama_produk'] = pendapatan_df['deskripsi'].str.split(' (').str[0]
+        except:
+            # Jika format tidak sesuai, gunakan deskripsi asli
+            if 'deskripsi' in pendapatan_df.columns:
+                pendapatan_df['nama_produk'] = pendapatan_df['deskripsi']
+            else:
+                pendapatan_df['nama_produk'] = 'Produk'
         produk_terlaris = pendapatan_df.groupby('nama_produk')['jumlah'].sum().reset_index()
         produk_terlaris = produk_terlaris.sort_values('jumlah', ascending=False)
         

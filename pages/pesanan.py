@@ -10,8 +10,13 @@ import uuid
 # Tambahkan path root ke sys.path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-# Import fungsi dari utils.py
+# Import fungsi dari utils.py dan utils_pesanan.py
 from utils import load_data, save_data
+from utils_pesanan import (
+    load_pesanan, save_pesanan, tambah_pesanan, get_pesanan_by_id, 
+    update_status_pesanan, get_statistik_pesanan, get_pesanan_aktif,
+    get_laporan_harian, get_produk_terlaris
+)
 
 # Fungsi untuk memuat CSS
 def load_css():
@@ -26,21 +31,6 @@ def loading_effect():
         progress_bar.progress(percent_complete + 1)
     time.sleep(0.5)
     progress_bar.empty()
-
-# Fungsi untuk memuat data pesanan
-def load_pesanan():
-    file_path = "data/pesanan.csv"
-    if os.path.exists(file_path):
-        return load_data(file_path)
-    else:
-        # Buat file baru dengan kolom yang sesuai
-        df = pd.DataFrame(columns=[
-            'id', 'tanggal', 'nama_pembeli', 'produk', 'jumlah', 'harga_total', 
-            'tingkat_kepedasan', 'catatan', 'metode_pembayaran', 'status_pesanan', 
-            'tipe_pesanan', 'waktu_pemesanan', 'waktu_selesai'
-        ])
-        save_data(df, file_path)
-        return df
 
 # Fungsi untuk memuat data produk
 def load_produk():
@@ -80,29 +70,6 @@ def simpan_pesanan(pesanan_data):
     save_data(pesanan_df, "data/pesanan.csv")
     return pesanan_id
 
-# Fungsi untuk memperbarui status pesanan
-def update_status_pesanan(pesanan_id, status_baru, waktu_selesai=None):
-    pesanan_df = load_pesanan()
-    if pesanan_id in pesanan_df['id'].values:
-        idx = pesanan_df[pesanan_df['id'] == pesanan_id].index[0]
-        pesanan_df.at[idx, 'status_pesanan'] = status_baru
-        
-        if status_baru == "Selesai" and waktu_selesai is None:
-            waktu_selesai = datetime.now().strftime('%H:%M:%S')
-        
-        if waktu_selesai:
-            pesanan_df.at[idx, 'waktu_selesai'] = waktu_selesai
-            
-        save_data(pesanan_df, "data/pesanan.csv")
-        return True
-    return False
-
-# Tambahkan fungsi untuk mendapatkan daftar pesanan aktif
-def get_pesanan_aktif():
-    pesanan_df = load_pesanan()
-    # Filter pesanan yang belum selesai
-    return pesanan_df[pesanan_df['status_pesanan'] != "Selesai"].sort_values(by='waktu_pemesanan')
-
 # Inisialisasi aplikasi
 st.set_page_config(
     page_title="Seblak Bujangan - Pencatatan Pesanan",
@@ -133,18 +100,33 @@ with tab1:
         # Load produk untuk dipilih
         produk_df = load_produk()
         produk_list = produk_df['nama'].tolist()
-        harga_dict = dict(zip(produk_df['nama'], produk_df['harga']))
+        produk_list.append("Prasmanan/Custom")
         
         produk = st.selectbox("Produk", produk_list)
         jumlah = st.number_input("Jumlah", min_value=1, value=1)
         
-        # Hitung harga total berdasarkan produk dan jumlah
-        if produk:
-            harga_satuan = harga_dict[produk]
-            harga_total = harga_satuan * jumlah
-            st.write(f"Harga Total: Rp {harga_total:,.0f}")
+        # Harga total berdasarkan inputan manual untuk sistem prasmanan
+        if produk == "Prasmanan/Custom":
+            custom_produk = st.text_input("Detail Pesanan Prasmanan", 
+                placeholder="Mis: Seblak Prasmanan + 2 Bakso + 3 Ceker")
+            harga_total = st.number_input("Harga Total (Rp)", min_value=0, step=1000, value=15000)
+            if custom_produk:
+                produk = f"Custom: {custom_produk}"
+            else:
+                produk = "Prasmanan"
         else:
-            harga_total = 0
+            # Hitung harga berdasarkan menu tetap
+            harga_dict = dict(zip(produk_df['nama'], produk_df['harga']))
+            harga_satuan = harga_dict[produk]
+            
+            # Input harga manual jika ada perubahan harga
+            use_manual_price = st.checkbox("Ubah harga?", help="Centang jika ingin mengubah harga")
+            
+            if use_manual_price:
+                harga_total = st.number_input("Harga Total (Rp)", min_value=0, step=1000, value=harga_satuan * jumlah)
+            else:
+                harga_total = harga_satuan * jumlah
+                st.write(f"Harga Total: Rp {harga_total:,.0f}")
         
         tingkat_kepedasan = st.select_slider(
             "Tingkat Kepedasan", 

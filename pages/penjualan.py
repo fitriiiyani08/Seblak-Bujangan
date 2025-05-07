@@ -175,8 +175,15 @@ if not keuangan_df.empty:
         # Visualisasi produk terlaris
         st.markdown("## 🏆 Produk Terlaris")
         
-        # Ekstrak nama produk dari deskripsi (hapus jumlah unit dalam kurung)
-        filtered_df['nama_produk'] = filtered_df['deskripsi'].str.split(' (').str[0]
+        # Ekstrak nama produk dari deskripsi dengan penanganan error
+        try:
+            filtered_df['nama_produk'] = filtered_df['deskripsi'].str.split(' (').str[0]
+        except:
+            # Jika format tidak sesuai, gunakan deskripsi asli
+            if 'deskripsi' in filtered_df.columns:
+                filtered_df['nama_produk'] = filtered_df['deskripsi']
+            else:
+                filtered_df['nama_produk'] = 'Produk'
         
         # Agregasi berdasarkan produk
         product_sales = filtered_df.groupby('nama_produk')['jumlah'].sum().reset_index()
