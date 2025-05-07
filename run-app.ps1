@@ -1,4 +1,4 @@
-# PowerShell script untuk menjalankan aplikasi Seblak Bujangan
+﻿# PowerShell script untuk menjalankan aplikasi Seblak Bujangan
 # Jalankan dengan: .\run-app.ps1
 
 Write-Host "========================================" -ForegroundColor Cyan
