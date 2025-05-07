@@ -42,9 +42,12 @@ def sync_pesanan_to_penjualan():
     if 'disinkronkan' not in pesanan_df.columns:
         pesanan_df['disinkronkan'] = False
     
+    # Pastikan tipe data disinkronkan adalah boolean
+    pesanan_df['disinkronkan'] = pesanan_df['disinkronkan'].astype(bool)
+    
     # Filter pesanan yang selesai dan belum disinkronkan
     pesanan_selesai = pesanan_df[(pesanan_df['status_pesanan'] == 'Selesai') & 
-                                (~pesanan_df['disinkronkan'])]
+                                (pesanan_df['disinkronkan'] == False)]
     
     # Jika tidak ada pesanan selesai yang belum disinkronkan, keluar
     if pesanan_selesai.empty:
@@ -98,9 +101,12 @@ def check_pending_sync():
         pesanan_df['disinkronkan'] = False
         pesanan_df.to_csv(pesanan_file, index=False)
     
+    # Pastikan tipe data disinkronkan adalah boolean
+    pesanan_df['disinkronkan'] = pesanan_df['disinkronkan'].astype(bool)
+    
     # Hitung pesanan yang perlu disinkronkan
     pesanan_pending = pesanan_df[(pesanan_df['status_pesanan'] == 'Selesai') & 
-                                (~pesanan_df['disinkronkan'])]
+                                (pesanan_df['disinkronkan'] == False)]
     
     return len(pesanan_pending)
 
